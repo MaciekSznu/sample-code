@@ -1,0 +1,273 @@
+/* stylelint-disable max-nesting-depth */
+@import "__settings/init";
+
+.block-hero {
+	$block: &;
+	margin-top: 0;
+	padding: rem(116) 0;
+	position: relative;
+	z-index: 1;
+	background-color: $text-color-base;
+	overflow: hidden;
+	min-height: rem(613);
+
+	@include media("<md") {
+		min-height: rem(484);
+		padding: rem(116) 0 rem(40);
+	}
+
+	&__slider-wrapper {
+		height: 100%;
+		width: 100%;
+		min-height: inherit;
+		padding-bottom: rem(69);
+		background-color: $text-light;
+	}
+
+	&__media-wrapper {
+		position: absolute;
+		z-index: -1;
+		inset: 0;
+
+		video {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	&__image {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		z-index: 0;
+		inset: 0;
+
+		img {
+			min-width: 100%;
+			min-height: 100%;
+			max-width: unset;
+			object-fit: cover;
+			height: 0;
+		}
+
+		&::after {
+			content: "";
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			z-index: 0;
+			inset: 0;
+			background-color: $color--black;
+			opacity: 0.57;
+		}
+	}
+
+	&__slide {
+		position: relative;
+		min-height: rem(613) !important;
+		padding: rem(114) 0 rem(90);
+
+		@include media("<md") {
+			min-height: rem(482) !important;
+			padding: rem(82) 0 rem(40);
+		}
+
+		#{$block}__image {
+			&::after {
+				display: none;
+			}
+		}
+
+		&--overlay {
+			#{$block}__image {
+				&::after {
+					display: block;
+				}
+			}
+		}
+	}
+
+	&__content {
+		*:not(.c-btn) {
+			color: $color-1;
+		}
+
+		p {
+			max-width: rem(495);
+
+			@include font(24, 27.6, 300);
+
+			@include media("<md") {
+				@include font(18, 20, 300);
+				max-width: 80%;
+			}
+		}
+
+		h1 {
+			@include font(46, 46, 500);
+			margin: rem(78) 0 rem(29);
+
+			@include media("<md") {
+				@include font(36, 36, 500);
+				margin: rem(81) 0 rem(36);
+				max-width: 80%;
+			}
+		}
+
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			max-width: rem(460);
+
+			@include media("<md") {
+				max-width: 80%;
+			}
+		}
+	}
+
+	&--slider {
+		padding: 0;
+		margin-bottom: rem(69) !important;
+
+		#{$block}__content {
+			position: relative;
+			z-index: 1;
+
+			h1 {
+				@include font(70, 65, 700);
+				margin-bottom: rem(52);
+				margin-top: rem(18);
+
+				@include media("<md") {
+					@include font(36, 40, 700);
+					margin: 0 0 rem(23);
+				}
+			}
+
+			p {
+				@include font(16, 20, 300);
+
+				@include media("<md") {
+					@include font(18, 20, 300);
+					max-width: 84%;
+				}
+			}
+
+			.c-btn {
+				margin-top: rem(23);
+
+				@include media("<md") {
+					margin-top: rem(26);
+				}
+			}
+		}
+
+		.slick-track {
+			display: flex !important;
+		}
+		.slick-slide {
+			height: inherit !important;
+			will-change: transform;
+		}
+	}
+
+	&__slider-controls {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: rem(69);
+		display: flex;
+		justify-content: center;
+		padding-top: rem(19);
+	}
+
+	.slick-arrow {
+		width: rem(30);
+		height: rem(30);
+		border-radius: rem(30);
+		position: relative;
+		top: unset;
+		background-color: transparent;
+		transition: background-color $default-transition;
+
+		&::after {
+			border: rem(2) solid $color-10;
+			border-width: 0 0 rem(2) rem(2);
+			width: rem(8);
+			height: rem(8);
+		}
+
+		&.slick-disabled {
+			pointer-events: none;
+			opacity: 0;
+		}
+
+		&:hover {
+			background-color: rgba($color-2, 0.5);
+		}
+	}
+
+	&__slider-prev {
+		margin-right: rem(10);
+	}
+
+	&__slider-next {
+		margin-left: rem(10);
+		&.slick-arrow {
+			&::after {
+				transform: translate(-100%, -50%) rotate(225deg);
+			}
+		}
+	}
+
+	&__slider-dots {
+		.slick-dots {
+			display: flex;
+			padding: 0;
+			margin: 0;
+			list-style: none;
+
+			@include media("<md") {
+				margin-top: rem(-2);
+			}
+
+			li {
+				&:not(:last-child) {
+					margin-right: rem(15);
+				}
+
+				button {
+					font-size: 0;
+					padding: 0;
+					width: rem(14);
+					height: rem(14);
+					border-radius: 50%;
+					border: rem(1) solid $text-color-base;
+					background-color: transparent;
+					transition: background-color $default-transition;
+
+					&:hover {
+						background-color: rgba($color-2, 0.5);
+					}
+
+				}
+
+				&:not(.slick-active) {
+					button {
+						cursor: pointer;
+					}
+				}
+
+				&.slick-active {
+					> button {
+						background-color: $text-color-base;
+					}
+				}
+			}
+		}
+	}
+}
+/* stylelint-enable max-nesting-depth */
